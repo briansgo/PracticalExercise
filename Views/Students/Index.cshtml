@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Student>
+@{
+    Layout = null;
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"
+            integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+</head>
+<body>
+    <form asp-controller="Students" asp-action="Index" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <hr />
+        <button type="submit">Cargar</button>
+    </form>
+    <button onclick="readTable()">Leer tabla</button>
+    @if (Model.Count() > 0)
+    {
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <hr />
+
+                    <table id="myTable" class="table" cellpaddong="0" cellspacing="0" border="1">
+
+                        @foreach (Student student in Model)
+                        {
+                            <tr>
+                                <td>@student.Nombres</td>
+                                <td>@student.ApellidoPaterno</td>
+                                <td>@student.ApellidoMaterno</td>
+                                <td>@student.FechaNacimiento</td>
+                                <td>@student.Grado</td>
+                                <td>@student.Grupo</td>
+                                <td>@student.Calificacion</td>
+                                <td>@student.Clave</td>
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+                <div class="col-6">
+                    <hr />
+                    <div class="card">
+                        <div class="card-header">
+                            Gráfica de calificaciones
+                        </div>
+                        <div class="card-body">
+                            <canvas class="my-4" id="bar"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+</body>
+
+</html>   
+
+
+<script type="text/javascript">
+
+    function readTable() {
+
+
+        //gets table
+        var myTable = document.getElementById('myTable');
+
+        //gets rows of table
+        var rowLength = myTable.rows.length;
+
+        //loops through rows
+        for (i = 0; i < rowLength; i++) {
+
+            //gets cells of current row
+            var rowCells = myTable.rows.item(i).cells;
+
+            //gets amount of cells of current row
+            var columnLength = rowCells.length;
+
+            //loops through each cell in current row
+            console.log(rowCells.item(0).innerHTML)
+            for (var j = 0; j < columnLength; j++) {
+
+                // get your cell info here
+                var cellVal = rowCells.item(j).innerHTML;
+                //alert(cellVal);
+            }
+        }
+        xlabels = ['pita', 'pota', 'juana']
+        xdata = [69, 885, 420]
+        loadChart(xlabels,xdata);
+    }
+
+    function loadChart(xlabels,xdata ) {
+        var barchart = document.getElementById('bar').getContext('2d');
+        var mybarchart = new Chart(barchart, {
+            type: 'bar',
+            data: {
+                labels: xlabels,
+                datasets: [{
+                    label: 'Gráfica de calificaciones',
+                    data: xdata,
+                    backgroundColor: 'rgba(0,150,180)'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+    }
+    
+
+    
+</script>
+
+
+
