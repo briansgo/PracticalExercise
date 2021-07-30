@@ -1,0 +1,17 @@
+X-cargar el excel a memoria y mostrar su contenido en la página web
+
+-realizar una gráfica de barras con las calificaciones de los alumnos (alumno-calificación)
+
+-alumno con mejor calificacion
+
+-alumno con peor calificación
+
+-promedio de calificación de todos los alumnos
+
+-agregar una columna que muestre la clave de usuario 
+	+Generar clave de usuario(ver correo para ver como es la clave)
+
+-método para rotar clave de usuario n numero de veces
+
+-mostrar la temperatura actual de la ciudad usando alguna WEB API
+
