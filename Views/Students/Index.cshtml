@@ -23,7 +23,7 @@
 
             <!--Clima-->
             <div class="col-3">
-                @*<div class="elfsight-app-46ee19d8-4ef0-4c9f-b3e2-53fea9ec5ceb"></div>*@
+                <div class="elfsight-app-46ee19d8-4ef0-4c9f-b3e2-53fea9ec5ceb"></div>
             </div>
 
             <!--Subir archivo-->
@@ -43,6 +43,83 @@
                 </div>
             </div>
 
+            @if (Model.Count() > 0)
+            {
+                <!-- MEJOR Y PEOR CALIFICACIÓN Y PROMEDIOS-->
+                <div class="col-6">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-6">Información adicional</div>
+                                <div class="col-6">
+                                    <button class="btn btn-primary float-right" onclick="promedios()">Calcular</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+
+                                <!--PROMEDIO GRUPAL-->
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div class="card-header">Promedio Grupal</div>
+                                        <div class="card-body"><h5 id="groupAvg"></h5></div>
+                                    </div>
+                                </div>
+
+
+                                <!--MEJOR CALIFICACION-->
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div class="card-header">Mejor Calificación</div>
+                                        <div class="card-body">
+
+                                            <table class="table" cellpaddong="0" cellspacing="0" border="1">
+                                                <tr>
+                                                    <td>Nombre</td>
+                                                    <td>Calificación</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p id="beststudent"></p></td>
+                                                    <td><p id="bestgrade"></p></td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!--PEOR CALIFICACION-->
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div class="card-header">Peor Calificación</div>
+                                        <div class="card-body">
+
+                                            <table class="table" cellpaddong="0" cellspacing="0" border="1">
+                                                <tr>
+                                                    <td>Nombre</td>
+                                                    <td>Calificación</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p id="worststudent"></p></td>
+                                                    <td><p id="worstgrade"></p></td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
         </div>
     </div>
 
@@ -78,12 +155,12 @@
                                 }
                             </table>
 
-                            <form >
+                            <div class="float-right">
                                 <label for="steps">Girar clave a la izquierda: </label>
                                 <input type="number" id="despizq" name="steps" step="1">
-                                <input type="submit" onclick="updateTable()">
-                            </form>
-
+                                <button class="btn btn-secondary" type="submit" onclick="updateTable()">Girar</button>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -92,8 +169,12 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            Gráfica
-                            <button class="btn btn-primary" onclick="loadChart()">Mostrar gráfica</button>
+                            <div class="row">
+                                <div class="col-6">Gráfica</div>
+                                <div class="col-6">
+                                    <button class="btn btn-primary float-right" onclick="loadChart()">Mostrar gráfica</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <canvas class="my-4" id="bar"></canvas>
@@ -102,88 +183,10 @@
                 </div>
             </div>
 
-            <br />
-
-            <div class="row">
-
-                <!-- MEJOR Y PEOR CALIFICACIÓN Y PROMEDIOS-->
-                <div class="col-6">
-                    <div class="card">
-
-                        <div class="card-header">
-                            Información adicional
-                            <button class="btn btn-primary" onclick="promedios(); updateTable()">Mostrar</button>
-                        </div>
-
-                    <div class="card-body">
-                        <div class="row">
-
-                            <!--PROMEDIO GRUPAL-->
-                            <div class="col-4">
-                                <div class="card">
-                                    <div class="card-header">Promedio Grupal</div>
-                                    <div class="card-body"><h5 id="groupAvg"></h5></div>
-                                </div>
-                            </div>
-
-
-                            <!--MEJOR CALIFICACION-->
-                            <div class="col-4">
-                                <div class="card">
-                                    <div class="card-header">Mejor Calificación</div>
-                                    <div class="card-body">
-
-                                        <table class="table" cellpaddong="0" cellspacing="0" border="1">
-                                            <tr>
-                                                <td>Nombre</td>
-                                                <td>Calificación</td>
-                                            </tr>
-                                            <tr>
-                                                <td><p id="beststudent"></p></td>
-                                                <td><p id="bestgrade"></p></td>
-                                            </tr>
-                                        </table>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!--PEOR CALIFICACION-->
-                            <div class="col-4">
-                                <div class="card">
-                                    <div class="card-header">Peor Calificación</div>
-                                    <div class="card-body">
-
-                                        <table class="table" cellpaddong="0" cellspacing="0" border="1">
-                                            <tr>
-                                                <td>Nombre</td>
-                                                <td>Calificación</td>
-                                            </tr>
-                                            <tr>
-                                                <td><p id="worststudent"></p></td>
-                                                <td><p id="worstgrade"></p></td>
-                                            </tr>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
             <div class="row">
                 <br />
-
             </div>
         </div>
-
-    </div>
 
     }
 
@@ -300,7 +303,7 @@
 
         var oldID
         var newID
-        let steps = 1
+        let steps = parseInt(document.getElementById('despizq').value);
 
         //gets table
         var myTable = document.getElementById('myTable');
@@ -325,14 +328,18 @@
 
         let aux
         let newID
-        for (let i = 0; i < steps; i++) {
-            aux = prevID.substring(0, 1)
-            newID = prevID.substring(1) + aux
-            prevID = newID
+
+        if (steps > 0) {
+            for (let i = 0; i < steps; i++) {
+                aux = prevID.substring(0, 1)
+                newID = prevID.substring(1) + aux
+                prevID = newID
+            }
+            return newID
         }
-
-        return newID
-
+        else {
+            return prevID
+        }
     }
 
 </script>
